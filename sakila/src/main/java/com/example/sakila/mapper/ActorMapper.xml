@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.sakila.mapper.ActorMapper">
+	
+	<!-- /on/filmOne -->
+	<select id="selectActorListByFilm"
+			parameterType="int"
+			resultType="com.example.sakila.vo.Actor">
+		SELECT 
+			a.actor_id actorId
+			, a.first_name firstName
+			, a.last_name lastName
+		FROM film_actor fa INNER JOIN actor a
+		ON fa.actor_id = a.actor_id
+		WHERE fa.film_id = #{filmId}
+	</select>
+	
+	
+	<select id="selectActorOne"
+			parameterType="int"
+			resultType="com.example.sakila.vo.Actor">
+		SELECT 
+			actor_id actorId
+			, first_name firstName
+			, last_name lastName
+			, last_update lastUpdate
+		FROM actor
+		WHERE actor_id = #{actorId}
+	</select>
+
+	<select id="selectActorList"
+			parameterType="Map"
+			resultType="com.example.sakila.vo.Actor">
+		SELECT 
+			actor_id actorId
+			, first_name firstName
+			, last_name lastName
+		FROM actor
+		<where>
+			<if test="searchWord != null">
+				first_name LIKE CONCAT('%', #{searchWord}, '%')
+				OR last_name LIKE CONCAT('%', #{searchWord}, '%')
+			</if>
+		</where>
+		ORDER BY first_name ASC
+		LIMIT #{beginRow}, #{rowPerPage}
+	</select>
+	
+	<insert id="insertActor" parameterType="com.example.sakila.vo.Actor">
+		<selectKey resultType="int" keyProperty="actorId" order="AFTER">
+			select LAST_INSERT_ID()	
+		</selectKey>
+	
+		INSERT INTO actor (
+			first_name, last_name
+		) VALUES (
+			#{firstName}, #{lastName}
+		)
+	</insert>
+</mapper>

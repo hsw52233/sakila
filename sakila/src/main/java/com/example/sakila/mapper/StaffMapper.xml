@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.sakila.mapper.StaffMapper">
+	<update id="updateStaff" parameterType="com.example.sakila.vo.Staff">
+		UPDATE staff
+		<set>
+			<if test="addressId != null and addressId != ''">
+				address_id = #{addressId},
+			</if>
+			<if test="email != null and email != ''">
+				email = #{email},
+			</if>
+			<if test="storeId != null and storeId != ''">
+				store_id = #{storeId},
+			</if>
+			<if test="active != null and active != ''">
+				active = #{active},
+			</if>
+			<if test="password != null and password != ''">
+				password = #{password},
+			</if>
+		</set>
+		WHERE staff_id = #{staffId}
+	</update>
+	
+	<select id="selectStaffCount"
+			resultType="int">
+		SELECT COUNT(*) FROM staff
+	</select>
+
+	<select id="selectStaffList"
+			parameterType="Map"
+			resultType="com.example.sakila.vo.Staff">
+		SELECT 
+			staff_id staffId
+			, first_name firstName
+			, last_name lastName
+			, address_id addressId
+			, email
+			, store_id storeId
+			, active
+			, username
+			, last_update lastUpdate
+		FROM staff
+		ORDER BY staff_id
+		LIMIT #{beginRow}, #{rowPerPage}
+	</select>
+
+	<insert id="insertStaff" parameterType="com.example.sakila.vo.Staff">
+		INSERT INTO staff (
+			first_name, last_name, address_id, email, store_id, username
+		) VALUES (#{firstName}, #{lastName}, #{addressId}, #{email}, #{storeId}, #{username});
+	</insert>
+
+	<select id="selectStaffOne" parameterType="int"
+			resultType="map">
+		SELECT 
+			t4.staff_id staffId
+			, t4.first_name firstName
+			, t4.last_name lastName
+			, t5.address staffAddress
+			, t5.address2 staffAddress2
+			, t5.district staffDistrict
+			, t5.postal_code staffPostCode
+			, t5.phone staffPhone
+			, t5.city staffCity
+			, t5.country staffCountry
+			, t4.store_id storeId
+			, t4.manager_staff_id managerStaffId
+			, t4.manager_name managerName
+			, t4.address storeAddress
+			, t4.address2 storeAddress2
+			, t4.district storeDistrict
+			, t4.postal_code storePostCode
+			, t4.phone storePhone
+			, t4.city storeCity
+			, t4.country storeCountry
+		FROM 
+		(SELECT 
+			s.staff_id
+			, s.first_name
+			, s.last_name
+			, s.address_id
+			, s.email
+			, s.username
+			, s.store_id
+			, t3.manager_staff_id
+			, t3.manager_name
+			, t3.address
+			, t3.address2
+			, t3.district
+			, t3.postal_code
+			, t3.phone
+			, t3.city
+			, t3.country
+		FROM staff s 
+		INNER JOIN 
+			(SELECT 
+				t2.store_id
+				, t2.manager_staff_id
+				, ms.username manager_name
+				, t2.address
+				, t2.address2
+				, t2.district
+				, t2.postal_code
+				, t2.phone
+				, t2.city
+				, t2.country
+			FROM staff ms 
+			INNER JOIN 
+				(SELECT 
+					s.store_id store_id
+					, s.manager_staff_id
+					, s.address_id
+					, t1.address
+					, t1.address2
+					, t1.district
+					, t1.postal_code
+					, t1.phone
+					, t1.city
+					, t1.country
+				FROM store s 
+				INNER JOIN 
+					(SELECT  
+						a.address_id
+						, a.address
+						, a.address2 
+						, a.district
+						, a.postal_code
+						, a.phone phone
+						, ci.city
+						, co.country
+					FROM address a 
+					INNER JOIN city ci
+					ON a.city_id = ci.city_id
+						INNER JOIN country co
+						ON ci.country_id = co.country_id) t1
+				ON s.address_id = t1.address_id) t2
+			ON ms.staff_id = t2.manager_staff_id) t3
+		ON s.store_id = t3.store_id) t4
+		INNER JOIN
+			(SELECT  
+				a.address_id
+				, a.address
+				, a.address2 
+				, a.district
+				, a.postal_code
+				, a.phone phone
+				, ci.city
+				, co.country
+			FROM address a 
+			INNER JOIN city ci
+			ON a.city_id = ci.city_id
+				INNER JOIN country co
+				ON ci.country_id = co.country_id) t5	
+		ON t4.address_id = t5.address_id
+		WHERE t4.staff_id = #{staffId}
+	</select>
+	
+	<select id = "login" parameterType="com.example.sakila.vo.Staff"
+			resultType="com.example.sakila.vo.Staff">
+		SELECT 
+			staff_id staffId
+			, store_id storeId
+			, username
+		FROM staff
+		WHERE active = 1 AND staff_id = #{staffId} AND password = #{password}
+	</select>
+</mapper>

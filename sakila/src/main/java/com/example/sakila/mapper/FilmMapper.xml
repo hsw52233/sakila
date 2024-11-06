@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.sakila.mapper.FilmMapper">
+	<select id="selectFilmOne"
+			parameterType="int"
+			resultType="Map">
+		SELECT 
+			fi.film_id filmId
+			, fi.title title
+			, fi.description description
+			, fi.release_year releaseYear
+			, fi.rental_duration rentalDuration
+			, fi.rental_rate rentalRate
+			, fi.length length
+			, fi.replacement_cost replacementCost
+			, fi.rating rating
+			, fi.special_features specialFeatures
+			, fi.last_update lastUpdate
+			, fi.original_language_id originalLanguageId
+			, la.name language
+		FROM film fi INNER JOIN language la
+		ON fi.language_id = la.language_id
+		WHERE fi.film_id = #{filmId}
+	</select>
+	
+	<!-- /on/actorOne -->
+	<select id="selectFilmTitleListByActor"
+			parameterType="int"
+			resultType="com.example.sakila.vo.Film">
+		SELECT 
+			f.film_id filmId
+			, f.title title
+		FROM film_actor fa INNER JOIN film f
+		ON fa.film_id = f.film_id
+		WHERE fa.actor_id = #{actorId}
+	</select>
+</mapper>
