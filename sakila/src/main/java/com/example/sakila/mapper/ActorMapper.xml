@@ -2,6 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.sakila.mapper.ActorMapper">
 	
+	<!-- selectActorCount Query -->
+	<select id="selectActorCount" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM actor
+		<where>
+			<if test="searchWord != null">
+				first_name LIKE CONCAT('%', #{searchWord}, '%') OR last_name LIKE CONCAT('%', #{searchWord}, '%')
+			</if>
+		</where>
+	</select>
+	
+	
+	
 	<!-- /on/filmOne -->
 	<select id="selectActorListByFilm"
 			parameterType="int"

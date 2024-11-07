@@ -42,7 +42,7 @@
 				</tr>
 			</table>
 			<div>
-				<a href="">actor 수정</a>
+				<a href="${pageContext.request.contextPath }/on/modifyActor">actor 수정[과제 : 입력폼, 액션, 서비스, 맵퍼, ... ]</a>
 			</div>
 			
 			

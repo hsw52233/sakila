@@ -53,7 +53,15 @@ public class ActorController {
 		
 		// int lastPage = actorService.getTotalCount(rowPerPage, searchWord);
 		List<Actor> actorList = actorService.getActorList(currentPage, rowPerPage, searchWord);
+        int lastPage = actorService.getLastPageBySearchWord(rowPerPage, searchWord);
+		
 		model.addAttribute("actorList", actorList);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("searchWord", searchWord);
+		model.addAttribute("lastPage", lastPage);
+		
+		log.debug("currentPage : " + currentPage);
+		log.debug("lastPage : " + lastPage);
 		
 		return "on/actorList";
 	}

@@ -47,6 +47,16 @@ public class ActorService {
 		return actorMapper.selectActorList(paramMap);
 	}
 	
+	public int getLastPageBySearchWord(int rowPerPage, String searchWord) {
+		int count = actorMapper.selectActorCount(searchWord);
+		System.out.println("count :" + count);
+		int lastPage = count / rowPerPage;
+		if(count % rowPerPage != 0) {
+			lastPage++;
+		}
+		return lastPage;
+	}
+	
 	
 	public void addActor(ActorForm actorForm, String path) {
 		 Actor actor = new Actor();
