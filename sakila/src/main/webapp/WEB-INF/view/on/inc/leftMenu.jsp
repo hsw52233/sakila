@@ -32,6 +32,17 @@
 	</li>
 	
 	<li class="list-group-item bg-light">
+		::: 영화 관리 :::
+	</li>
+	<li class="list-group-item bg-light">
+		<a href="">영화 리스트</a>
+	</li>
+	<li class="list-group-item bg-light">
+		<a href="${pageContext.request.contextPath}/on/addFilm">영화 추가</a>
+	</li>
+	
+	
+	<li class="list-group-item bg-light">
 		::: 고객 관리 :::
 	</li>
 	<li class="list-group-item bg-light">
@@ -49,5 +60,9 @@
 	</li>
 	<li class="list-group-item bg-light">
 		<a href="${pageContext.request.contextPath}/on/addActor">배우 추가</a>
+	</li>
+	
+	<li class="list-group-item bg-light">
+		::: 통계 :::
 	</li>
 </ul>

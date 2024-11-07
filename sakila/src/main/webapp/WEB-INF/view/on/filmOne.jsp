@@ -24,6 +24,10 @@
 			<div>
 				${film}
 			</div>
+			<div>
+				<a href="">영화 수정</a>
+			</div>
+			
 			<br>	
 			<div>
 				<h2>작품에 출연한 배우들</h2>

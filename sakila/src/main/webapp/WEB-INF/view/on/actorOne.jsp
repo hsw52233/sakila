@@ -22,7 +22,7 @@
 			<!-- main content -->
 			<h1>ACTOR ONE</h1>
 			<!-- ACTOR -->
-			<h2>ACTOR</h2>
+			<h2>&#128526; ACTOR</h2>
 			<table class="table">
 				<tr>
 					<td>actorId</td>
@@ -42,12 +42,14 @@
 				</tr>
 			</table>
 			<div>
-				<a href="${pageContext.request.contextPath }/on/modifyActor">actor 수정[과제 : 입력폼, 액션, 서비스, 맵퍼, ... ]</a>
+				<a href="${pageContext.request.contextPath}/on/modifyActor">
+					actor 수정[과제 : 입력폼, 액션, 서비스, 맵퍼,...]
+				</a>
 			</div>
 			
-			
+			<br>
 			<!-- ACTOR FILE -->
-			<h2>ACTOR FILE</h2>
+			<h2>&#128526; ACTOR FILE</h2>
 			<table class="table">
 				<tr>
 					<td>image</td>
@@ -57,22 +59,28 @@
 					<td>삭제</td>
 				</tr>
 				<c:forEach var="af" items="${actorFileList}">
-					<td>
-						<img src="${pageContext.request.contextPath}/upload/${af.filename}.${af.ext}">
-					</td>
-					<td>${af.type}</td>
-					<td>${af.size} Byte</td>
-					<td>${af.createDate}</td>
-					<td><a href="">삭제</a></td>
+					<tr>
+						<td>
+							<img src="${pageContext.request.contextPath}/upload/${af.filename}.${af.ext}">
+						</td>
+						<td>${af.type}</td>
+						<td>${af.size} Byte</td>
+						<td>${af.createDate}</td>
+						<td><a href="" class="btn btn-warning">삭제</a></td>
+					</tr>
 				</c:forEach>
 			</table>
 			<div>
-				<a href="">이미지파일 추가</a>
+				<a href="${pageContext.request.contextPath}/on/addActorFile?actorId=${actor.actorId}" 
+				class="btn btn-success">
+					이미지파일 추가
+				</a>
 			</div>
 			
+			<br>
 			<!-- FILM -->
 			<div>
-				<h2>출연 작품</h2>
+				<h2>&#128526; 출연 작품</h2>
 				<c:forEach var="f" items="${filmList}">
 					<a href="${pageContext.request.contextPath}/on/filmOne?filmId=${f.filmId}">
 						${f.title}
