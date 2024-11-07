@@ -6,15 +6,15 @@ import lombok.Data;
 public class Film {
 	private int filmId; // PK
 	private String title; // 초록키
-	private String description;
-	private String releaseYear;
+	private String description; // NULL
+	private Integer releaseYear; // NULL
 	private int languageId; // FK
-	private int originalLanguageId; // FK
+	private Integer originalLanguageId; // FK 기본값 NULL
 	private int rentalDuration;
-	private Double rentalRate;
-	private int length;
-	private Double replacementCost;
+	private double rentalRate;
+	private Integer length; // 기본값 NULL
+	private double replacementCost;
 	private String rating;
-	private String specialFeatures;
+	private String specialFeatures; // 기본값 NULL ex) xxx, yyy, zz,
 	private String lastUpdate;
 }

@@ -21,6 +21,9 @@
 		<div class="col-sm-10">
 			<!-- main content -->
 			<h1>ADD ACTOR</h1>
+			
+			<div>${msg}</div>
+			
 			<form id="formActor" method="post" action="${pageContext.request.contextPath}/on/addActor"
 				enctype="multipart/form-data">
 				<table class="table">
@@ -36,8 +39,8 @@
 						<td>file</td>
 						<td>
 							<div id="fileDiv">
-								<button type="button" id="btnAddFile">파일추가</button>
-								<button type="button" id="btnRemoveFile">파일삭제</button>
+								<button type="button" id="btnAddFile">파일폼 추가</button>
+								<button type="button" id="btnRemoveFile">파일폼 삭제</button>
 							</div>
 						</td>
 					</tr>

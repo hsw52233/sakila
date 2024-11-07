@@ -24,24 +24,17 @@
 			<form id="formAddFilm" method="post" action="${pageContext.request.contextPath}/on/addFilm">
 				<table class="table table-striped table-bordered" style="width: 80%">
 					<tr>
+						<td colspan="2" class="fw-bold">필수 항목</td>
+					</tr>
+					
+					<tr>
 						<td>title</td>
 						<td>
 							<input type="text" id="title" name="title">
 						</td>
 					</tr>
-					<tr>
-						<td>description</td>
-						<td>
-							<!-- textarea -->
-							<textarea rows="3" cols="50" id="description" name="description"></textarea>
-						</td>
-					</tr>
-					<tr>
-						<td>releaseYear</td>
-						<td>
-							<input type="number" id="releaseYear" name="releaseYear">
-						</td>
-					</tr>
+					
+					
 					<tr>
 						<td>languageId</td>
 						<td>
@@ -53,17 +46,7 @@
 							</select>
 						</td>
 					</tr>
-					<tr>
-						<td>originalLanguageId</td>
-						<td>
-							<select id="originalLanguageId" name="originalLanguageId">
-								<option value="">오리지널언어선택</option>
-								<c:forEach var="la" items="${languageList}">
-									<option value="${la.languageId}">${la.name}</option>
-								</c:forEach>
-							</select>
-						</td>
-					</tr>
+					
 					<tr>
 						<td>rentalDuration</td>
 						<td>
@@ -80,13 +63,7 @@
 							$
 						</td>
 					</tr>
-					<tr>
-						<td>length</td>
-						<td>
-							<input type="number" id="length" name="length">
-							분
-						</td>
-					</tr>
+					
 					<tr>
 						<td>replacementCost</td>
 						<td>
@@ -99,11 +76,42 @@
 						<td>rating</td>
 						<td>
 							<!-- radio, enum(G, PG, PG-13, R, NC-17), DB기본값 : 'G' -->
-							<input type="radio" name="rating" class="rating" value="G">G<br>
-							<input type="radio" name="rating" class="rating" value="PG">PG<br>
-							<input type="radio" name="rating" class="rating" value="PG-13">PG-13<br>
-							<input type="radio" name="rating" class="rating" value="R">R<br>
+							<input type="radio" name="rating" class="rating" value="G">G
+							<input type="radio" name="rating" class="rating" value="PG">PG
+							<input type="radio" name="rating" class="rating" value="PG-13">PG-13
+							<input type="radio" name="rating" class="rating" value="R">R
 							<input type="radio" name="rating" class="rating" value="NC-17">NC-17
+						</td>
+					</tr>
+					
+					<tr>
+						<td colspan="2" class="fw-bold">선택적 항목</td>
+					</tr>
+					
+					<!-- 선택적 항목 -->
+					<tr>
+						<td>length</td>
+						<td>
+							<input type="number" id="length" name="length">
+							분
+						</td>
+					</tr>
+					
+					<tr>
+						<td>originalLanguageId</td>
+						<td>
+							<select id="originalLanguageId" name="originalLanguageId">
+								<option value="">오리지널언어선택</option>
+								<c:forEach var="la" items="${languageList}">
+									<option value="${la.languageId}">${la.name}</option>
+								</c:forEach>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>releaseYear</td>
+						<td>
+							<input type="number" id="releaseYear" name="releaseYear">
 						</td>
 					</tr>
 					<tr>
@@ -114,13 +122,21 @@
 								DB기본값 : NULL
 							-->
 							<input type="checkbox" name="specialFeatures" class="specialFeatures"
-								value="Trailers">Trailers<br>
+								value="Trailers">Trailers
 							<input type="checkbox" name="specialFeatures" class="specialFeatures"
-								value="Commentaries">Commentaries<br>
+								value="Commentaries">Commentaries
 							<input type="checkbox" name="specialFeatures" class="specialFeatures"
-								value="Deleted Scenes">Deleted Scenes<br>
+								value="Deleted Scenes">Deleted Scenes
 							<input type="checkbox" name="specialFeatures" class="specialFeatures"
-								value="Behind the Scenes">Behind the Scenes<br>
+								value="Behind the Scenes">Behind the Scenes
+						</td>
+					</tr>
+					
+					<tr>
+						<td>description</td>
+						<td>
+							<!-- textarea -->
+							<textarea rows="3" cols="50" id="description" name="description"></textarea>
 						</td>
 					</tr>
 				</table>
@@ -131,8 +147,22 @@
 </body>
 <script>
 	$('#btnAddFilm').click(function(){
-		// 폼 유효성 검사
-		$('#formAddFilm').submit();
+		// 폼 유효성 검사(제외 description, releaseYear, originalLanguageId, length, specialFeatures)
+		if($('#title').val() == '') {
+			alert('title을 입력하세요');
+		} else if($('#languageId').val() =='') {
+			alert('languageId를 선택하세요');
+		} else if($.isNumeric($('#rentalDuration').val()) == false) {
+			alert('rentalDuration 숫자를 입력하세요');
+		} else if($.isNumeric($('#rentalRate').val()) == false) {
+			alert('rentalRate 숫자를 입력하세요');
+		} else if($.isNumeric($('#replacementCost').val()) == false) {
+			alert('replacementCost 숫자를 입력하세요');
+		} else if($('.rating:checked').length == 0) {
+			alert('rating을 선택하세요');
+		} else {
+			$('#formAddFilm').submit();
+		}
 	});
 </script>
 </html>

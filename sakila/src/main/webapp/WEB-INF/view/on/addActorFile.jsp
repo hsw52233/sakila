@@ -21,6 +21,9 @@
 		<div class="col-sm-10">
 			<!-- main content -->
 			<h1>ACTOR FILE ADD</h1>
+			
+			<div>${msg}</div>
+			
 			<form id="formAddActorFile" 
 				  method="post" enctype="multipart/form-data"
 				  action="${pageContext.request.contextPath}/on/addActorFile">

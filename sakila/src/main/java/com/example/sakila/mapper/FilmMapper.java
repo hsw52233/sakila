@@ -9,6 +9,8 @@ import com.example.sakila.vo.Film;
 
 @Mapper
 public interface FilmMapper {
+	int insertFilm(Film film);
+	
 	// film X language
 	Map<String, Object> selectFilmOne(int filmId);
 	

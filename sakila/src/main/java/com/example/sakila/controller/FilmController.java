@@ -30,7 +30,10 @@ public class FilmController {
 	@PostMapping("/on/addFilm")
 	public String addFilm(FilmForm filmForm) {
 		log.debug(filmForm.toString());
+		
 		// filmService : FilmForm -> Film
+		filmService.addFilm(filmForm);
+		
 		return "redirect:/on/filmList";
 	}
 	
