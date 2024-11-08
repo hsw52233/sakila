@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.sakila.mapper.ActorFileMapper">
+	
+	<select id="selectActorFileOne"
+			parameterType="int"
+			resultType="com.example.sakila.vo.ActorFile">
+		SELECT
+			actor_file_id actorFileId
+			, filename
+			, ext
+		FROM actor_file
+		WHERE actor_file_id = #{actorFileId}
+	</select>
+	
+	<!-- /on/removeActorFile -->
+	<delete id="deleteActorFile"
+			parameterType="int">
+		DELETE FROM actor_file
+		WHERE actor_file_id = #{actorFileId}
+	</delete>
+	
 	<select id="selectActorFileListByActor"
 			parameterType="int"
 			resultType="com.example.sakila.vo.ActorFile">

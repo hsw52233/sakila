@@ -18,6 +18,19 @@ import com.example.sakila.vo.ActorForm;
 public class ActorFileService {
 	@Autowired ActorFileMapper actorFileMapper;
 	
+	// /on/removeActorFile
+	// 1) actor_file 삭제 2) 물리 파일 삭제(이름이 필요, 경로PATH 필요)
+	public void removeActorFile(int actorFileId, String path) {
+		// 1) 파일이름 select
+		ActorFile actorFile = actorFileMapper.selectActorFileOne(actorFileId);
+		int row = actorFileMapper.deleteActorFile(actorFileId);
+		if(row == 1) { // actor_file정보 삭제가 되었다면 물지적 파일삭제
+			String fullname = path + actorFile.getFilename() + "." + actorFile.getExt();
+			File f = new File(fullname); // 
+			f.delete();
+		}
+	}
+	
 	// /on/addActorFile
 	public void addActorFile(ActorForm actorForm, String path) {
 		 if(actorForm.getActorFile() != null) {

@@ -18,6 +18,21 @@
 			<c:import url="/WEB-INF/view/on/inc/leftMenu.jsp"></c:import>
 		</div>
 		
+		<!-- ● 
+			● 1) actor 상세
+			1-1) actor 수정 - /on/modifyActor
+			1-2) actor 삭제 - /on/removeActor (actor_file삭제 + film_actor삭제 + actor삭제)
+			
+			● 2) actor_file 리스트
+			● 2-1) actor_file 추가 
+			2-2) actor_file 삭제 /on/removeActorFile
+						
+			● 3) film_actor 리스트
+			3-1) film_actor 추가 /on/addFilmByActor -> 필름 검색 후 선택
+			3-2) film_actor 삭제 /on/removeFilmActor 
+
+		 -->
+		
 		<div class="col-sm-10">
 			<!-- main content -->
 			<h1>ACTOR ONE</h1>
@@ -42,7 +57,7 @@
 				</tr>
 			</table>
 			<div>
-				<a href="${pageContext.request.contextPath}/on/modifyActor?actorId=${actor.actorId}">
+				<a href="${pageContext.request.contextPath}/on/modifyActor">
 					actor 수정[과제 : 입력폼, 액션, 서비스, 맵퍼,...]
 				</a>
 			</div>
@@ -66,7 +81,11 @@
 						<td>${af.type}</td>
 						<td>${af.size} Byte</td>
 						<td>${af.createDate}</td>
-						<td><a href="" class="btn btn-warning">삭제</a></td>
+						<td>
+							<a href="${pageContext.request.contextPath}/on/removeActorFile?actorFileId=${af.actorFileId}&actorId=${actor.actorId}" 
+								class="btn btn-warning">삭제
+							</a>
+						</td>
 					</tr>
 				</c:forEach>
 			</table>
