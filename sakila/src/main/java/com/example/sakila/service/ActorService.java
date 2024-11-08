@@ -27,16 +27,16 @@ public class ActorService {
 	@Autowired ActorFileMapper actorFileMapper;
 	
 	// /on/filmOne
-	public List<Actor> getActorListByFilm(int filmId) {
+	public List<Actor> getActorListByFilm(int filmId) { //특정 영화와 관련된 배우 목록을 검색
 		return actorMapper.selectActorListByFilm(filmId);
 	}
 	
 	// /on/actorOne
-	public Actor getActorOne(int actorId) {
+	public Actor getActorOne(int actorId) { // ID를 기준으로 단일 액터의 세부 정보를 가져옵니다
 		return actorMapper.selectActorOne(actorId);
 	}
 	
-	
+	//검색 기준에 따라 페이지가 매겨진 배우 목록을 검색
 	public List<Actor> getActorList(int currentPage, int rowPerPage, String searchWord) {
 		Map<String, Object> paramMap = new HashMap<>();
 		int beginRow = (currentPage - 1) * rowPerPage;
@@ -47,6 +47,7 @@ public class ActorService {
 		return actorMapper.selectActorList(paramMap);
 	}
 	
+	//검색 결과에 따라 페이지가 매겨진 배우 목록의 마지막 페이지 번호를 계
 	public int getLastPageBySearchWord(int rowPerPage, String searchWord) {
 		int count = actorMapper.selectActorCount(searchWord);
 		System.out.println("count :" + count);
@@ -63,7 +64,7 @@ public class ActorService {
 		 actor.setFirstName(actorForm.getFirstName());
 		 actor.setLastName(actorForm.getLastName());
 		 
-		 int row1 = actorMapper.insertActor(actor);
+		 int row1 = actorMapper.insertActor(actor); //ActorMapper새로운 액터를 데이터베이스에 삽입
 		 // mybatis selectKey의 값
 		 int actorId = actor.getActorId();
 		 
