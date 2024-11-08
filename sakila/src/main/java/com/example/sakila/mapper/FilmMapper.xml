@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.sakila.mapper.FilmMapper">
+	<select id="selectFilmListByTitle"
+			parameterType="String"
+			resultType="com.example.sakila.vo.Film">
+		SELECT
+			film_id filmId
+			, title
+		FROM film
+		WHERE title LIKE CONCAT('%',#{searchTitle},'%')
+	</select>
+	
 	<insert id="insertFilm" parameterType="com.example.sakila.vo.Film">
 		INSERT INTO film(
 			title

@@ -16,6 +16,10 @@ import com.example.sakila.vo.FilmForm;
 public class FilmService {
 	@Autowired FilmMapper filmMapper;
 	
+	public List<Film> getFilmListByTitle(String searchWord) {
+		return filmMapper.selectFilmListByTitle(searchWord);
+	}
+	
 	public int addFilm(FilmForm filmForm) {
 		Film film = new Film();
 		// FilmForm --> Film
