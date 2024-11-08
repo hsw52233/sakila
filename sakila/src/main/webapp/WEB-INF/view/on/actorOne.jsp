@@ -57,8 +57,12 @@
 				</tr>
 			</table>
 			<div>
-				<a href="${pageContext.request.contextPath}/on/modifyActor">
-					actor 수정[과제 : 입력폼, 액션, 서비스, 맵퍼,...]
+				<a href="${pageContext.request.contextPath}/on/modifyActor?actorId=${actor.actorId}">
+					actor 수정
+				</a>
+				&nbsp;
+				<a href="${pageContext.request.contextPath}/on/reomveActor?actorId=${actor.actorId}">
+					actor 삭제
 				</a>
 			</div>
 			
@@ -144,10 +148,12 @@
 <script>
 	// film title검색하는 버턴
 	$('#btnSearchFilm').click(function(){
+		// 유효성 검사 코드 추가
 		$('#formSearchFilm').submit();
 	});
 	// 출연작(film) 추가하는 버턴
-	$('#btnAddFilm').click(function(){ 
+	$('#btnAddFilm').click(function(){
+		// 유효성 검사 코드 추가
 		$('#formAddFilm').submit();
 	});
 </script>
