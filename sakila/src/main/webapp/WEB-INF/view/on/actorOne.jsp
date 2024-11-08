@@ -20,7 +20,7 @@
 		
 		<!-- ● 
 			● 1) actor 상세
-			1-1) actor 수정 - /on/modifyActor
+			● 1-1) actor 수정 - /on/modifyActor
 			1-2) actor 삭제 - /on/removeActor (actor_file삭제 + film_actor삭제 + actor삭제)
 			
 			● 2) actor_file 리스트
@@ -61,7 +61,7 @@
 					actor 수정
 				</a>
 				&nbsp;
-				<a href="${pageContext.request.contextPath}/on/reomveActor?actorId=${actor.actorId}">
+				<a href="${pageContext.request.contextPath}/on/removeActor?actorId=${actor.actorId}">
 					actor 삭제
 				</a>
 			</div>
