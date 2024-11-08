@@ -33,7 +33,7 @@ public class ActorFileController {
 		}
 		
 		String path = session.getServletContext().getRealPath("/upload/");
-		actorFileService.addActorFile(actorForm, path);
+		actorFileService.addActorFile(actorForm, path); // 배우의 프로필에 파일을 추가하는 맥락에서 파일 업로드를 처리하는 데 사용
 		return "redirect:/on/actorOne?actorId="+actorForm.getActorId();
 	}
 	

@@ -29,7 +29,7 @@ public class ActorController {
 	@Autowired FilmService filmService;
 	
 	@GetMapping("/on/actorOne")
-	public String actorOne(Model model
+	public String actorOne(Model model    //JSP뷰에서 액세스할 수 있는 모델에 속성을 추가하는데 사용
 							, @RequestParam int actorId) {
 		Actor actor = actorService.getActorOne(actorId);
 		List<ActorFile> actorFileList = actorFileService.getActorFileListByActor(actorId);
@@ -38,7 +38,7 @@ public class ActorController {
 		log.debug(actorFileList.toString());
 		log.debug(filmList.toString());
 		
-		model.addAttribute("actor", actor);
+		model.addAttribute("actor", actor);  // 값을 뷰에 보냄
 		model.addAttribute("actorFileList", actorFileList);
 		model.addAttribute("filmList", filmList);
 		
@@ -84,6 +84,7 @@ public class ActorController {
 		}
 		
 		String path = session.getServletContext().getRealPath("/upload/");
+		//웹 애플리케이션의 배포 디렉토리 내의 특정 디렉토리에 대한 절대적인 물리적 경로를 얻는 것
 		log.debug(path);
 		
 		actorService.addActor(actorForm, path);
