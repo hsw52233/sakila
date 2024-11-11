@@ -20,7 +20,8 @@
 		<!-- ● 
 			● 1) film 상세
 			1-1) film 수정 - /on/modifyFilm
-			1-2) film 삭제 - /on/removeFilm (film_category삭제 + film_actor삭제 + film삭제)
+			1-2) film 삭제 - /on/removeFilm 
+			(inventory 렌탈정보확인 + film_category삭제 + film_actor삭제 + film삭제)
 			
 			2) film_category 리스트
 			2-1) film_category 추가 /on/addFilmCategory -> 카테고리 전체 목록에서 선택
@@ -29,6 +30,8 @@
 			● 3) film_actor 리스트
 			3-1) film_actor 추가 /on/addActorByFilm -> 액터 검색 후 선택
 			3-2) film_actor 삭제 /on/removeFileActor
+			
+			4) invetory 정보
 
 		 -->
 		<div class="col-sm-10">
@@ -41,6 +44,11 @@
 			<div>
 				<a href="">영화 수정</a>
 				<a href="">영화 삭제</a><!--  -->
+			</div>
+			
+			<br>	
+			<div>
+				<h2>작품 장르(CATEGORY)</h2>
 			</div>
 			
 			<br>	

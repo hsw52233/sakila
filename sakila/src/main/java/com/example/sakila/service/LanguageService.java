@@ -1,6 +1,7 @@
 package com.example.sakila.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,16 @@ import com.example.sakila.vo.Language;
 public class LanguageService {
 	@Autowired LanguageMapper languageMapper;
 	
-	public List<Language> getLanguageList() {
-		return languageMapper.selectLanguageList();
+	public List<Language> getLanguageList(Map paramMap) {
+		return languageMapper.selectLanguageList(paramMap);
+	}
+	
+	public int getLastPage(int rowPerPage) {
+		int count = languageMapper.selectLanguageCount();
+		int lastPage = count / rowPerPage;
+		if(count % rowPerPage != 0) {
+			lastPage += 1;
+		}
+		return lastPage;
 	}
 }

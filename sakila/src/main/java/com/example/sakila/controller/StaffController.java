@@ -49,7 +49,10 @@ public class StaffController {
 		// model(storeList)
 		log.debug("searchAddress: "+ searchAddress);
 		
-		List<Store> storeList = storeService.getStoreList();
+		Map<String, Object> map = new HashMap<>();
+		
+		
+		List<Store> storeList = storeService.getStoreList(map);
 		model.addAttribute("storeList", storeList);
 		
 		// model(addressList) <- searchAddress가 공백이 아니면 검색후
