@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.sakila.mapper.LanguageMapper">
-	<select id="selectLanguageList"
-	        parameterType="Map"
-			resultType="com.example.sakila.vo.Language">
-		SELECT 
-			language_id languageId
-			, name
-		FROM language
+	
+	<!-- selectLanguageList Query -->
+	<select id="selectLanguageList" resultType="com.example.sakila.vo.Language">
+		SELECT language_id languageId, name, last_update lastUpdate FROM language
 	</select>
 	
-	<select id="selectLanguageCount"
-			resultType="int">
-		SELECT COUNT(*) FROM language
-	</select>
+	<!-- insertLanguage Query : 언어 추가 -->
+	<insert id="insertLanguage" parameterType="com.example.sakila.vo.Language">
+		INSERT INTO language(name) VALUES(#{name})
+	</insert>
+	
+	<!-- deleteLanguage : 언어 삭제 -->
+	<delete id="deleteLanguage" parameterType="int">
+		DELETE FROM language WHERE language_id = #{languageId}
+	</delete>
 </mapper>

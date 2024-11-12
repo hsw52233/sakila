@@ -65,7 +65,7 @@
 						<form id="formLanguageId" action="${pageContext.request.contextPath}/on/modifyFilm"
 								method="post">
 							<input type="hidden" name="filmId" value="${film.filmId}">
-							<input type="text" value="${film.language}" 
+							<input type="text"   value="${film.language}"
 									name="languageId" id="languageId"> 
 							<button type="button" id="btnLanguageId">languageId 수정</button>
 						</form>
@@ -172,7 +172,7 @@
 		if($('#description').val() == '') {
 			alert('수정할 description을 입력하세요');
 		} else {
-			$('#formDiscription').submit();
+			$('#formDescription').submit();
 		}
 	});
 	$('#btnReleaseYear').click(function(){
