@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.sakila.mapper.FilmCategoryMapper">
+	<!-- 필름 삭제시... -->
+	<delete id="deleteFilmCategoryByFilm"
+			parameterType="Integer">
+		DELETE FROM film_category
+		WHERE film_id = #{filmId}
+	</delete>
+	
+	<!-- 카테고리 삭제시... -->
+	<delete id="deleteFilmCategoryByCategory"
+			parameterType="Integer">
+		DELETE FROM film_category
+		WHERE category_id = #{categoryId}
+	</delete>
+
+</mapper>

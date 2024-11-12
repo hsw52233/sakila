@@ -16,25 +16,24 @@
 	</li>
 	<li class="list-group-item bg-light">
 		<a href="${pageContext.request.contextPath}/on/storeList" class="btn">지점 리스트</a>
-		<!-- 
-			StoreMapper.selectStoreList() : List<Map> - store x staff x address
+		<!--
+			StoreMapper.selectStroeList() : List<Map> - store x staff x adress
 			StoreService.getStoreList() : List<Map>
 			GET - /on/storeList - StoreController.storeList() - storeList.jsp
-		 -->
-		
+		-->
 	</li>
 	<li class="list-group-item bg-light">
 		<a href="${pageContext.request.contextPath}/on/addStore" class="btn">지점 추가</a>
 		<!-- 
-			GET - /on/addStore
-				- StoreController.addStore() : storeList 모델추가, search주소검색결과 모델추가 - addStroe.jsp
-			
-			StoreMapper.insertStore() : Integer
-			StoreService.addStore() : Integer
-			Post - /on/addStore - StoreController.addStore(Store)
+			GET - /on/addStore 
+				- StoreController.addStore() : staffList 모델추가, search주소검색결과 모델추가 - addStore.jsp 
+		 	
+		 	StoreMapper.insertStore() : Integer
+		 	StoreService.addStore() : Integer
+		 	POST - /on/addStore - StoreController.addStore(Store)
+		 			 
 		 -->
 	</li>
-	
 	
 	<li class="list-group-item bg-light fw-bold">
 		::: STAFF 관리 :::

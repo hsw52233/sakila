@@ -1,6 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.sakila.mapper.FilmMapper">
+	<!-- POST : /on/modifyFilm  -->
+	<update id="updateFilm"
+			parameterType="com.example.sakila.vo.Film">
+		UPDATE film
+		<set>
+			<if test="title != null">
+				title = #{title}
+			</if>
+			<if test="description != null">
+				description = #{description}
+			</if>
+			<if test="releaseYear != null">
+				release_year = #{releaseYear}
+			</if>
+			<if test="languageId != null">
+				language_id = #{languageId}
+			</if>
+			<if test="originalLanguageId != null">
+				original_language_id = #{originalLanguageId}
+			</if>
+			<if test="rentalDuration != null">
+				rental_duration = #{rentalDuration}
+			</if>
+			<if test="rentalRate != null">
+				rental_rate = #{rentalRate}
+			</if>
+			<if test="length != null">
+				length = #{length}
+			</if>
+			<if test="replacementCost != null">
+				replacement_cost = #{replacementCost}
+			</if>
+			<if test="rating != null">
+				rating = #{rating}
+			</if>
+			<if test="specialFeatures != null">
+				special_features = #{specialFeatures}
+			</if>
+		</set>
+		WHERE film_id = #{filmId}
+	</update>
+
+	<delete id="deleteFilmByKey"
+			parameterType="Integer">
+		DELETE FROM film
+		WHERE film_id = #{filmId}
+	</delete>
+	
 	<!--  categoryId가 null, 0이 아닐때 -->
 	<select id="selectFilmListByCategory"
 			parameterType="Map"
@@ -78,7 +126,9 @@
 			, #{specialFeatures}
 		)
 	</insert>
-
+	
+	<!-- GET : /on/modifyFilm  -->
+	<!-- GET : /on/filmOne  -->
 	<select id="selectFilmOne"
 			parameterType="int"
 			resultType="Map">

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.sakila.service.ActorService;
 import com.example.sakila.service.CategoryService;
 import com.example.sakila.service.FilmService;
+import com.example.sakila.service.InventoryService;
 import com.example.sakila.service.LanguageService;
 import com.example.sakila.vo.Actor;
 import com.example.sakila.vo.Category;
@@ -29,6 +30,34 @@ public class FilmController {
 	@Autowired ActorService actorService;
 	@Autowired LanguageService languageService;
 	@Autowired CategoryService categoryService;
+	@Autowired InventoryService inventoryService;
+	
+	@GetMapping("/on/removeFilm")
+	public String removeFilm(Model model
+							, @RequestParam Integer filmId) {
+		
+		// 필름이 인벤토리에 등록되어 있다면 삭제 불가
+		Integer count = inventoryService.getCountInventoryByFilm(filmId);
+		if(count != 0) {
+			/* 메세지 추가 할려면 ...  but 중복코드 리팩토링 이슈발생 */
+			Map<String, Object> film = filmService.getFilmOne(filmId);
+			log.debug(film.toString());
+			
+			List<Actor> actorList = actorService.getActorListByFilm(filmId);
+			
+			model.addAttribute("film", film);
+			model.addAttribute("actorList", actorList);
+			model.addAttribute("removeFilmMsg", "film이 inventory에 존재합니다");
+			return "on/filmOne";
+			
+			// return "redirect:/on/filmOne"; // 메세지 추가가 힘든 구현
+		}
+		
+
+		filmService.removeFilmByKey(filmId);
+
+		return "redirect:/on/filmList";
+	}
 	
 	@GetMapping("/on/filmList")
 	public String filmList(Model model
@@ -68,7 +97,6 @@ public class FilmController {
 	@GetMapping("/on/addFilm")
 	public String addFilm(Model model) {
 		// languageList
-		
 		Map<String, Object> map = new HashMap<>();
 		List<Language> languageList = languageService.getLanguageList(map);
 		log.debug(languageList.toString());

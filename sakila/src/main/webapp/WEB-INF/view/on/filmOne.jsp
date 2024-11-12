@@ -20,7 +20,7 @@
 		<!-- ● 
 			● 1) film 상세
 			1-1) film 수정 - /on/modifyFilm
-			1-2) film 삭제 - /on/removeFilm 
+			● 1-2) film 삭제 - /on/removeFilm 
 			(inventory 렌탈정보확인 + film_category삭제 + film_actor삭제 + film삭제)
 			
 			2) film_category 리스트
@@ -43,7 +43,8 @@
 			</div>
 			<div>
 				<a href="">영화 수정</a>
-				<a href="">영화 삭제</a><!--  -->
+				<a href="${pageContext.request.contextPath}/on/removeFilm?filmId=${film.filmId}">영화 삭제</a>
+				<span class="text-danger">${removeFilmMsg}</span>
 			</div>
 			
 			<br>	
