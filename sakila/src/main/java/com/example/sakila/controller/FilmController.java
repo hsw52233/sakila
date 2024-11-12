@@ -18,6 +18,7 @@ import com.example.sakila.service.InventoryService;
 import com.example.sakila.service.LanguageService;
 import com.example.sakila.vo.Actor;
 import com.example.sakila.vo.Category;
+import com.example.sakila.vo.Film;
 import com.example.sakila.vo.FilmForm;
 import com.example.sakila.vo.Language;
 
@@ -31,6 +32,25 @@ public class FilmController {
 	@Autowired LanguageService languageService;
 	@Autowired CategoryService categoryService;
 	@Autowired InventoryService inventoryService;
+	
+	
+	@PostMapping("/on/modifyFilm")
+	public String modifyFilm(Film film) {
+		log.debug(film.toString());
+		
+		int row = filmService.modifyFilm(film);
+		
+		return "redirect:/on/filmOne?filmId="+film.getFilmId();
+	}
+	@GetMapping("/on/modifyFilm")
+	public String modifyFilm(Model model, @RequestParam int filmId) {
+		
+		
+		Map<String, Object> film = filmService.getFilmOne(filmId);
+		model.addAttribute("film", film);
+		log.debug("" + film.toString());
+		return "on/modifyFilm";
+	}
 	
 	@GetMapping("/on/removeFilm")
 	public String removeFilm(Model model

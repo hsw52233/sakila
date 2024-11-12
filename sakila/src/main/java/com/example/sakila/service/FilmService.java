@@ -11,8 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.sakila.mapper.FilmActorMapper;
 import com.example.sakila.mapper.FilmCategoryMapper;
 import com.example.sakila.mapper.FilmMapper;
+import com.example.sakila.vo.Actor;
 import com.example.sakila.vo.Film;
 import com.example.sakila.vo.FilmForm;
+import com.example.sakila.vo.Staff;
 
 @Service
 @Transactional
@@ -20,6 +22,15 @@ public class FilmService {
 	@Autowired FilmMapper filmMapper;
 	@Autowired FilmActorMapper filmActorMapper;
 	@Autowired FilmCategoryMapper filmCategoryMapper;
+	
+	
+	// /on/modifyFilm
+			public int modifyFilm(Film film) {
+				return filmMapper.updateFilm(film);
+			}
+			
+			
+		
 	
 	public void removeFilmByKey(Integer filmId) {
 		// 1) 필름_카테고리 삭제
