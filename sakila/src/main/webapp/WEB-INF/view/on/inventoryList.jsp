@@ -9,7 +9,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 <meta charset="UTF-8">
-<title>addLanguage</title>
+<title>Insert title here</title>
 </head>
 <body class="container-flud">
 	<div class="row">
@@ -20,36 +20,24 @@
 		
 		<div class="col-sm-10">
 			<!-- main content -->
-			<h1>ADD Language</h1>
-			
-			<div>${msg}</div>
-			
-			<form id="formActor" method="post" action="${pageContext.request.contextPath}/on/addLanguage"
-				enctype="multipart/form-data">
-				<table class="table">
-					
+			<h1>${storeId}지점 INVENTORY LIST</h1>
+			<table class="table">
+				<tr>
+					<td>inventoryId</td>
+					<td>filmId</td>
+					<td>title</td>
+					<td>lastUpdate</td>
+				</tr>
+				<c:forEach var="iv" items="${inventoryList}">
 					<tr>
-						<td>name</td>
-						<td><input type="text" name="name"></td>
+						<td>${iv.inventoryId}</td>
+						<td>${iv.filmId}</td>
+						<td>${iv.title}</td>
+						<td>${iv.lastUpdate}</td>
 					</tr>
-					
-				</table>
-				<button type="button" id="btnAddLanguage">언어 추가</button>
-			</form>
+				</c:forEach>
+			</table>
 		</div>
 	</div>
 </body>
-<script>
-$('#btnAddLanguage').click(function(){
-	if( $('#name').val() == '') {
-		alert('이름을 입력하세요');
-	} else {
-		$('#formActor').submit();
-	}
-});
-
-
-
-
-</script>
 </html>

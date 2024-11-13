@@ -1,17 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.sakila.mapper.StoreMapper">
-	<select id="selectStoreList"
-			parameterType="Map"
-			resultType="com.example.sakila.vo.Store">
-		SELECT store_id storeId
-			   ,manager_staff_id managerStaffId
-			   ,address_id addressId
-		 FROM store
+	<!-- selectStoreList Query -->
+	<select id="selectStoreList" resultType="Map">
+		SELECT s.store_id storeId, s.manager_staff_id managerStaffId, a.address address, a.address2 address2, a.district district, 
+			   a.postal_code postalCode, a.phone phone, c.city city, co.country country, 
+			   sf.staff_id staffId, sf.first_name firstName, sf.last_name lastName, s.last_update lastUpdate 
+		FROM store s INNER JOIN address a ON s.address_id = a.address_id 
+		INNER JOIN city c ON a.city_id = c.city_id 
+		INNER JOIN country co ON c.country_id = co.country_id 
+		INNER JOIN staff sf ON sf.staff_id = s.manager_staff_id
 	</select>
 	
 	<select id="selectStoreCount"
 			resultType="int">
 		SELECT COUNT(*) FROM store
 	</select>
+	
+	<!-- selectActorCount Query -->
+	<select id="selectActorCount" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM actor
+		<where>
+			<if test="searchWord != null">
+				first_name LIKE CONCAT('%', #{searchWord}, '%') OR last_name LIKE CONCAT('%', #{searchWord}, '%')
+			</if>
+		</where>
+	</select>
+	
+	<!-- insertStore Query : 지점 추가 -->
+	<insert id="insertStore" parameterType="com.example.sakila.vo.Store">
+		insert into staff(first_name, last_name) values(#{firstName}, #{lastName})
+	</insert>
 </mapper>

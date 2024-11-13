@@ -26,4 +26,7 @@ public interface ActorMapper {
 	List<Actor> selectActorList(Map<String, Object> map);
 	
 	int insertActor(Actor actor);
+	
+	// actorListCount
+		int selectActorCount(String searchWord);
 }

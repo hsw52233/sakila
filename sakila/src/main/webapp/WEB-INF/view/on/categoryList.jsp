@@ -9,7 +9,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 <meta charset="UTF-8">
-<title>addLanguage</title>
+<title>Insert title here</title>
 </head>
 <body class="container-flud">
 	<div class="row">
@@ -20,36 +20,41 @@
 		
 		<div class="col-sm-10">
 			<!-- main content -->
-			<h1>ADD Language</h1>
+			<h1>CATEGORY LIST</h1>
 			
-			<div>${msg}</div>
-			
-			<form id="formActor" method="post" action="${pageContext.request.contextPath}/on/addLanguage"
-				enctype="multipart/form-data">
-				<table class="table">
+			<table class="table table-striped">
+				<tr>
+					<td>categoryId</td>
+					<td>name</td>
+					<td>lastUpdate</td>
+					<td>수정</td>
+					<td>삭제</td>
 					
+					
+					
+				</tr>
+				<c:forEach var = "s" items="${categoryList}">
 					<tr>
-						<td>name</td>
-						<td><input type="text" name="name"></td>
+						<td>${s.categoryId}</td>
+						<td>${s.name}</td>
+						<td>${s.lastUpdate}</td>
+						<td><a href="${pageContext.request.contextPath}/on/modifyCategory?categoryId=${category.categoryId}">
+					수정
+				</a></td>
+						<td><a href="${pageContext.request.contextPath}/on/removeCategory?categoryId=${category.categoryId}">
+				    삭제
+				</a></td>
+						
+						
+						<td>
+							
+						</td>
 					</tr>
-					
-				</table>
-				<button type="button" id="btnAddLanguage">언어 추가</button>
-			</form>
+				</c:forEach>
+			</table>
+			
 		</div>
+		
 	</div>
 </body>
-<script>
-$('#btnAddLanguage').click(function(){
-	if( $('#name').val() == '') {
-		alert('이름을 입력하세요');
-	} else {
-		$('#formActor').submit();
-	}
-});
-
-
-
-
-</script>
 </html>

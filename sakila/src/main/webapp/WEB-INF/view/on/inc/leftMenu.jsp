@@ -34,7 +34,11 @@
 		 			 
 		 -->
 	</li>
+	<li class="list-group-item bg-light">
+		<a href="${pageContext.request.contextPath}/on/addInventory" class="btn">인벤토리 추가</a>
+	</li>
 	
+	<!-- ------------------------------------------------------------------------ -->
 	<li class="list-group-item bg-light fw-bold">
 		::: STAFF 관리 :::
 	</li>
@@ -50,7 +54,7 @@
 		::: 영화 관리 :::
 	</li>
 	<li class="list-group-item bg-light">
-		<a href="${pageContext.request.contextPath}/on/CategoryList" class="btn">카테고리 리스트</a>
+		<a href="${pageContext.request.contextPath}/on/categoryList" class="btn">카테고리 리스트</a>
 	</li>
 	<li class="list-group-item bg-light">
 		<a href="${pageContext.request.contextPath}/on/addCategory" class="btn">카테고리 추가</a>

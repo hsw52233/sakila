@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.sakila.mapper.StoreMapper;
+import com.example.sakila.vo.Language;
 import com.example.sakila.vo.Staff;
 import com.example.sakila.vo.Store;
 
@@ -15,6 +16,12 @@ import com.example.sakila.vo.Store;
 @Transactional
 public class StoreService {
 	@Autowired StoreMapper storeMapper;
+	
+	
+	// /on/addLanguage
+		public int addStore(Store paramstore) {
+			return storeMapper.insertStore(paramstore);
+		}
 	
 	public List<Store> getStoreList(Map paramMap) {
 		return storeMapper.selectStoreList(paramMap);

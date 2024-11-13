@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.sakila.service.StoreService;
+import com.example.sakila.vo.Language;
 import com.example.sakila.vo.Store;
 
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +24,20 @@ public class StoreController {
 
 	@Autowired
 	StoreService storeService;
+	
+	@GetMapping("/on/addStore")
+	public String addStore() {
+		return "on/addStore";
+	}
+	
+	@PostMapping("/on/addStore")
+	public String addStore(Store store) {
+		int insertLanguageRow = storeService.addStore(store);
+		if(insertLanguageRow == 0) { 
+			return "on/addStore";
+		}
+		return "redirect:/on/storeList";
+	}
 
 	@GetMapping("/on/storeList")
 	public String staffList(Model model, @RequestParam(defaultValue = "1") int currentPage,

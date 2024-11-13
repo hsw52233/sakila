@@ -100,7 +100,6 @@ public class FilmService {
 		
 		return filmMapper.insertFilm(film);
 	}
-	
 	public Map<String, Object> getFilmOne(int filmId) {
 		return filmMapper.selectFilmOne(filmId);
 	}

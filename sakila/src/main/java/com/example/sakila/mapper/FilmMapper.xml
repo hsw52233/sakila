@@ -128,7 +128,6 @@
 			, #{specialFeatures}
 		)
 	</insert>
-	
 	<!-- GET : /on/modifyFilm  -->
 	<!-- GET : /on/filmOne  -->
 	<select id="selectFilmOne" parameterType="int" resultType="Map">

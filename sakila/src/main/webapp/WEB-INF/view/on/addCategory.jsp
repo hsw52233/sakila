@@ -9,7 +9,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 <meta charset="UTF-8">
-<title>addLanguage</title>
+<title>addCategory</title>
 </head>
 <body class="container-flud">
 	<div class="row">
@@ -20,11 +20,11 @@
 		
 		<div class="col-sm-10">
 			<!-- main content -->
-			<h1>ADD Language</h1>
+			<h1>ADD Category</h1>
 			
 			<div>${msg}</div>
 			
-			<form id="formActor" method="post" action="${pageContext.request.contextPath}/on/addLanguage"
+			<form id="formCategory" method="post" action="${pageContext.request.contextPath}/on/addCategory"
 				enctype="multipart/form-data">
 				<table class="table">
 					
@@ -34,22 +34,18 @@
 					</tr>
 					
 				</table>
-				<button type="button" id="btnAddLanguage">언어 추가</button>
+				<button type="button" id="btnAddCategory">카테고리 추가</button>
 			</form>
 		</div>
 	</div>
 </body>
 <script>
-$('#btnAddLanguage').click(function(){
+$('#btnAddCategory').click(function(){
 	if( $('#name').val() == '') {
 		alert('이름을 입력하세요');
 	} else {
-		$('#formActor').submit();
+		$('#formCategory').submit();
 	}
 });
-
-
-
-
 </script>
 </html>

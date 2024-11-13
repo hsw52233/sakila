@@ -45,6 +45,16 @@
 		WHERE fa.film_id = #{filmId}
 	</select>
 	
+	<!-- selectActorCount Query -->
+	<select id="selectActorCount" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM actor
+		<where>
+			<if test="searchWord != null">
+				first_name LIKE CONCAT('%', #{searchWord}, '%') OR last_name LIKE CONCAT('%', #{searchWord}, '%')
+			</if>
+		</where>
+	</select>
+	
 	
 	<select id="selectActorOne"
 			parameterType="int"

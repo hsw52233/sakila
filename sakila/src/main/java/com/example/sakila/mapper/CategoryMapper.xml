@@ -9,4 +9,15 @@
 			, last_update lastUpdate
 		FROM category
 	</select>
+	
+	
+	<!-- insertCategory Query : 카테고리 추가 -->
+	<insert id="insertCategory" parameterType="com.example.sakila.vo.Category">
+		INSERT INTO category(name) VALUES(#{name})
+	</insert>
+	
+	<!-- deleteCategory : 카테고리 삭제 -->
+	<delete id="deleteCategory" parameterType="int">
+		DELETE FROM category WHERE category_id = #{categoryId}
+	</delete>
 </mapper>

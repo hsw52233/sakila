@@ -116,7 +116,7 @@
 					</form>
 					
 					<form id="formAddFilm" method="post"
-						action="${pageContext.request.contextPath}/on/addFilmByActor">
+						action="${pageContext.request.contextPath}/on/addFilmActorByActor">
 						<input type="hidden" name="actorId" value="${actor.actorId}">
 						<select size="5" name="filmId">
 							<c:forEach var="sf" items="${searchFilmList}">
@@ -136,7 +136,7 @@
 							${f.title}
 						</a>
 						&nbsp;
-						<a href="${pageContext.request.contextPath}/on/removeFilmActor?filmId=${f.filmId}&actorId=${actor.actorId}" 
+						<a href="${pageContext.request.contextPath}/on/removeFilmActorByActor?filmId=${f.filmId}&actorId=${actor.actorId}" 
 							class="btn btn-danger">flim_actor에서 삭제</a>
 						<!-- 삭제시 f.filmId & actor.actorId 필요 -->
 					</div>
