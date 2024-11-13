@@ -20,4 +20,26 @@
 	<delete id="deleteCategory" parameterType="int">
 		DELETE FROM category WHERE category_id = #{categoryId}
 	</delete>
+	
+	<update id="updateCategory" parameterType="com.example.sakila.vo.Category">
+		UPDATE category
+		<set>
+			<if test="name != null and name !=''">
+				name = #{name}
+			</if>
+			
+		</set>
+		WHERE category_id = #{categoryId}
+	</update>
+	
+	<select id="selectCategory"
+			parameterType="int"
+			resultType="com.example.sakila.vo.Category">
+		SELECT 
+			category_id categoryId
+			, name name
+			, last_update lastUpdate
+		FROM category
+		WHERE category_id = #{categoryId}
+	</select>
 </mapper>

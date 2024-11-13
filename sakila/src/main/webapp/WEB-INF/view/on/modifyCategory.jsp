@@ -20,42 +20,35 @@
 		
 		<div class="col-sm-10">
 			<!-- main content -->
-			<h1>CATEGORY LIST</h1>
-			
-			<table class="table table-striped">
+			<h1>MODIFY ACTOR</h1>
+			<table class="table">
 				<tr>
-					<td>categoryId</td>
 					<td>name</td>
-					<td>lastUpdate</td>
-					<td>수정</td>
-					<td>삭제</td>
-					
-					
-					
+					<td>
+						<form id="formName" action="${pageContext.request.contextPath}/on/modifyCategory"
+								method="post">
+							<input type="hidden" name="categoryId" value="${category.categoryId}">
+							<input type="text" value="${category.name}" 
+									name="name" id="name"> 
+							<button type="button" id="btnName">name 수정</button>
+						</form>
+					</td>
 				</tr>
-				<c:forEach var = "s" items="${categoryList}">
-					<tr>
-						<td>${s.categoryId}</td>
-						<td>${s.name}</td>
-						<td>${s.lastUpdate}</td>
-						<td><a href="${pageContext.request.contextPath}/on/modifyCategory?categoryId=${s.categoryId}">
-					수정
-				</a></td>
-						<td><a href="${pageContext.request.contextPath}/on/removeCategory?categoryId=${s.categoryId}">
-						
-				    삭제
-				</a></td>
-						
-						
-						<td>
-							
-						</td>
-					</tr>
-				</c:forEach>
+				
+				
 			</table>
-			
 		</div>
-		
 	</div>
 </body>
+<script>
+	$('#btnName').click(function(){
+		if($('#formName').val() == '') {
+			alert('수정할 name을 입력하세요');
+		} else {
+			$('#formName').submit();
+		}
+	});
+	
+	
+</script>
 </html>

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.example.sakila.vo.Actor;
 import com.example.sakila.vo.Category;
 import com.example.sakila.vo.Language;
 
@@ -16,5 +17,10 @@ public interface CategoryMapper {
 		int insertCategory(Category paramCategory);
 		
 		// /on/removeCategory
-		int deleteCategory(int categoryId);
+		Integer deleteCategory(Integer categoryId);
+		
+		int updateCategory(Category category);
+		
+		// /on/actorOne
+		Category selectCategory(int categoryId);
 }

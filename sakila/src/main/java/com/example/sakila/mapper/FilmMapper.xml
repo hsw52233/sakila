@@ -1,49 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.sakila.mapper.FilmMapper">
-
-	
 	<!-- POST : /on/modifyFilm  -->
-	<update id="updateFilm" parameterType="com.example.sakila.vo.Film">
-    UPDATE film
-    <set>
-        <if test="title != null">
-            title = #{title},
-        </if>
-        <if test="description != null">
-            description = #{description},
-        </if>
-        <if test="releaseYear != null">
-            release_year = #{releaseYear},
-        </if>
-        <if test="languageId != null and languageId != 0" >
-            language_id = #{languageId},
-        </if>
-        <if test="originalLanguageId != null">
-            original_language_id = #{originalLanguageId},
-        </if>
-        <if test="rentalDuration != null and rentalDuration != 0">
-            rental_duration = #{rentalDuration},
-        </if>
-        <if test="rentalRate != null and rentalRate != 0">
-            rental_rate = #{rentalRate},
-        </if>
-        <if test="length != null">
-            length = #{length},
-        </if>
-        <if test="replacementCost != null and replacementCost != 0">
-            replacement_cost = #{replacementCost},
-        </if>
-        <if test="rating != null">
-            rating = #{rating},
-        </if>
-        <if test="specialFeatures != null">
-            special_features = #{specialFeatures}
-        </if>
-        
-    </set>
-    WHERE film_id = #{filmId}
-</update>
+	<update id="updateFilm"
+			parameterType="com.example.sakila.vo.Film"> <!-- 참조null, 숫자0, false -->
+		UPDATE film
+		<set>
+			<if test="title != null">
+				title = #{title}
+			</if>
+			<if test="description != null">
+				description = #{description}
+			</if>
+			<if test="releaseYear != null">
+				release_year = #{releaseYear}
+			</if>
+			<if test="languageId != null">
+				language_id = #{languageId}
+			</if>
+			<if test="originalLanguageId != null">
+				original_language_id = #{originalLanguageId}
+			</if>
+			<if test="rentalDuration != null">
+				rental_duration = #{rentalDuration}
+			</if>
+			<if test="rentalRate != null">
+				rental_rate = #{rentalRate}
+			</if>
+			<if test="length != null">
+				length = #{length}
+			</if>
+			<if test="replacementCost != null">
+				replacement_cost = #{replacementCost}
+			</if>
+			<if test="rating != null">
+				rating = #{rating}
+			</if>
+			<if test="specialFeatures != null">
+				special_features = #{specialFeatures}
+			</if>
+		</set>
+		WHERE film_id = #{filmId}
+	</update>
 
 	<delete id="deleteFilmByKey"
 			parameterType="Integer">
@@ -128,16 +126,29 @@
 			, #{specialFeatures}
 		)
 	</insert>
+	
 	<!-- GET : /on/modifyFilm  -->
 	<!-- GET : /on/filmOne  -->
-	<select id="selectFilmOne" parameterType="int" resultType="Map">
-		SELECT fi.film_id filmId, fi.title title, fi.description description, fi.release_year releaseYear, fi.rental_duration rentalDuration, 
-			   fi.rental_rate rentalRate, fi.length length, fi.replacement_cost replacementCost,
-			   fi.rating rating, fi.special_features specialFeatures, fi.last_update lastUpdate, 
-			   fi.original_language_id originalLanguageId, la.name language, ol.name originalLanguage
+	<select id="selectFilmOne"
+			parameterType="int"
+			resultType="Map">
+		SELECT 
+			fi.film_id filmId
+			, fi.title title
+			, fi.description description
+			, fi.release_year releaseYear
+			, fi.rental_duration rentalDuration
+			, fi.rental_rate rentalRate
+			, fi.length length
+			, fi.replacement_cost replacementCost
+			, fi.rating rating
+			, fi.special_features specialFeatures
+			, fi.last_update lastUpdate
+			, fi.original_language_id originalLanguageId
+			, la.name language
 		FROM film fi INNER JOIN language la
-		ON fi.language_id = la.language_id LEFT OUTER JOIN language ol ON fi.original_language_id = ol.language_id
-		WHERE film_id = #{filmId}
+		ON fi.language_id = la.language_id
+		WHERE fi.film_id = #{filmId}
 	</select>
 	
 	<!-- /on/actorOne -->

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.sakila.service.CategoryService;
+import com.example.sakila.vo.Actor;
 import com.example.sakila.vo.Category;
 import com.example.sakila.vo.FilmCategory;
 import com.example.sakila.vo.Language;
@@ -59,6 +60,19 @@ public class CategoryController {
 		return "redirect:/on/categoryList";
 	}
 	
-	
+	@PostMapping("/on/modifyCategory")
+	public String modifyCategory(Category category) {
+		log.debug(category.toString());
+		
+		int row = categoryService.modifyCategory(category);
+		
+		return "redirect:/on/categoryList";
+	}
+	@GetMapping("/on/modifyCategory")
+	public String modifyCategory(Model model, @RequestParam int categoryId) {
+	    Category category = categoryService.getCategoryById(categoryId); // Fetch specific category
+	    model.addAttribute("category", category);
+	    return "on/modifyCategory";
+	}
 
 }
