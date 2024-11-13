@@ -45,8 +45,15 @@
 		<a href="${pageContext.request.contextPath}/on/addStaff" class="btn">스탭 추가</a>
 	</li>
 	
+	<!-- 영화관리 부분 -->
 	<li class="list-group-item bg-light fw-bold">
 		::: 영화 관리 :::
+	</li>
+	<li class="list-group-item bg-light">
+		<a href="${pageContext.request.contextPath}/on/CategoryList" class="btn">카테고리 리스트</a>
+	</li>
+	<li class="list-group-item bg-light">
+		<a href="${pageContext.request.contextPath}/on/addCategory" class="btn">카테고리 추가</a>
 	</li>
 	<li class="list-group-item bg-light">
 		<a href="${pageContext.request.contextPath}/on/languageList" class="btn">언어 리스트</a>

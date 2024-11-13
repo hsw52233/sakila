@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.sakila.mapper.FilmCategoryMapper">
+	<delete id="deleteFilmCategory"
+			parameterType="com.example.sakila.vo.FilmCategory">
+		DELETE FROM film_category
+		WHERE film_id = #{filmId}
+		AND category_id = #{categoryId}
+	</delete>
+
+	<insert id="insertFilmCategory"
+			parameterType="com.example.sakila.vo.FilmCategory">
+		INSERT INTO film_category(
+			film_id
+			, category_id
+		) VALUES (
+			#{filmId}
+			, #{categoryId}
+		)
+	</insert>
+	
+	
 	<!-- 특정필름의 카테고리 리스트 -->
 	<!-- /on/filmOne -->
 	<select id="selectFilmCategoryListByFilm"

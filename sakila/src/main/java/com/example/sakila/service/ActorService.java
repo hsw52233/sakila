@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.management.RuntimeErrorException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,43 +30,46 @@ public class ActorService {
 	@Autowired ActorFileMapper actorFileMapper;
 	@Autowired FilmActorMapper filmActorMapper;
 	
+	public List<Actor> getActorListByActor(String searchName) {
+		return actorMapper.selectActorListByActor(searchName);
+	}
+	
 	
 	// /on/removeActor
-		public void removeActor(int actorId, String path) {
-			// 1) film_actor 삭제(없을 수도 있다)
-			filmActorMapper.deleteFileByActor(actorId);
-			// 2) actor_file 삭제
-			List<ActorFile> list = actorFileMapper.selectActorFileListByActor(actorId);
-			actorFileMapper.deleteActorFileByActor(actorId);
-			// 3) actor 삭제
-			int row = actorMapper.deleteActor(actorId);
-			// 4) 물리적 파일 삭제
-			if(row == 1 && list !=null && list.size() > 0) { // actor 삭제했고 물리적파일 존재한다면
-				for(ActorFile af : list) {
-					String fullname = path + af.getFilename() + "." + af.getExt();
-					File f = new File(fullname);
-					f.delete();
-				}
+	public void removeActor(int actorId, String path) {
+		// 1) film_actor 삭제(없을 수도 있다)
+		filmActorMapper.deleteFileByActor(actorId);
+		// 2) actor_file 삭제
+		List<ActorFile> list = actorFileMapper.selectActorFileListByActor(actorId);
+		actorFileMapper.deleteActorFileByActor(actorId);
+		// 3) actor 삭제
+		int row = actorMapper.deleteActor(actorId);
+		// 4) 물리적 파일 삭제
+		if(row == 1 && list !=null && list.size() > 0) { // actor 삭제했고 물리적파일 존재한다면
+			for(ActorFile af : list) {
+				String fullname = path + af.getFilename() + "." + af.getExt();
+				File f = new File(fullname);
+				f.delete();
 			}
 		}
+	}
 	
 	// /on/modifyActor
-		public int modifyActor(Actor actor) {
-			return actorMapper.updateActor(actor);
-		}
-	
+	public int modifyActor(Actor actor) {
+		return actorMapper.updateActor(actor);
+	}
 	
 	// /on/filmOne
-	public List<Actor> getActorListByFilm(int filmId) { //특정 영화와 관련된 배우 목록을 검색
+	public List<Actor> getActorListByFilm(int filmId) {
 		return actorMapper.selectActorListByFilm(filmId);
 	}
 	
 	// /on/actorOne
-	public Actor getActorOne(int actorId) { // ID를 기준으로 단일 액터의 세부 정보를 가져옵니다
+	public Actor getActorOne(int actorId) {
 		return actorMapper.selectActorOne(actorId);
 	}
 	
-	//검색 기준에 따라 페이지가 매겨진 배우 목록을 검색
+	
 	public List<Actor> getActorList(int currentPage, int rowPerPage, String searchWord) {
 		Map<String, Object> paramMap = new HashMap<>();
 		int beginRow = (currentPage - 1) * rowPerPage;
@@ -75,24 +80,13 @@ public class ActorService {
 		return actorMapper.selectActorList(paramMap);
 	}
 	
-	//검색 결과에 따라 페이지가 매겨진 배우 목록의 마지막 페이지 번호를 계
-	public int getLastPageBySearchWord(int rowPerPage, String searchWord) {
-		int count = actorMapper.selectActorCount(searchWord);
-		System.out.println("count :" + count);
-		int lastPage = count / rowPerPage;
-		if(count % rowPerPage != 0) {
-			lastPage++;
-		}
-		return lastPage;
-	}
-	
 	
 	public void addActor(ActorForm actorForm, String path) {
 		 Actor actor = new Actor();
 		 actor.setFirstName(actorForm.getFirstName());
 		 actor.setLastName(actorForm.getLastName());
 		 
-		 int row1 = actorMapper.insertActor(actor); //ActorMapper새로운 액터를 데이터베이스에 삽입
+		 int row1 = actorMapper.insertActor(actor);
 		 // mybatis selectKey의 값
 		 int actorId = actor.getActorId();
 		 
