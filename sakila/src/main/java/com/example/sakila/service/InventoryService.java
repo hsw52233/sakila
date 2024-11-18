@@ -8,11 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.sakila.mapper.InventoryMapper;
+import com.example.sakila.vo.Inventory;
 
 @Service
 public class InventoryService {
 	@Autowired InventoryMapper inventoryMapper;
 	
+	public Integer addInventory(Inventory inventory) {
+		return inventoryMapper.insertInventory(inventory);
+	}
 	
 	public List<Map<String, Object>> getInventoryListByStore(
 			Integer storeId, Integer currentPage, Integer rowPerPage) {
