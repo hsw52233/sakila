@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.sakila.mapper.InventoryMapper">
+	<delete id="deleteInvetoryByKey"
+			parameterType="Integer">
+		DELETE FROM inventory
+		WHERE inventory_id = #{inventoryId}
+	</delete>
+
 	<insert id="insertInventory" parameterType="com.example.sakila.vo.Inventory">
 		INSERT INTO inventory(
 			film_id, store_id

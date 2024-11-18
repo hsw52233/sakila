@@ -9,6 +9,9 @@ import com.example.sakila.vo.Inventory;
 
 @Mapper
 public interface InventoryMapper {
+	// /on/removeInventoryByKey
+	Integer deleteInvetoryByKey(Integer inventoryId);
+	
 	// /on/addInventory
 	Integer insertInventory(Inventory inventory);
 	
