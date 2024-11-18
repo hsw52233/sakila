@@ -27,6 +27,24 @@ public class CustomerController {
 	@Autowired StoreService storeService;
 	@Autowired AddressService addressService;
 	
+	@GetMapping("/on/customerList")
+	public String customerList(Model model
+							, @RequestParam(defaultValue = "1") Integer currentPage
+							, @RequestParam(defaultValue = "10") Integer rowPerPage) {
+		Map<String, Object> resultMap = customerService.getCustomerList(currentPage, rowPerPage);
+		
+		log.debug(resultMap.toString());
+		
+		model.addAttribute("currentPage", currentPage);
+		// resultMap 풀어서.... 이동(통으로 넘기면 View코드 복잡...)
+		model.addAttribute("startPagingNum", resultMap.get("startPagingNum"));
+		model.addAttribute("endPagingNum", resultMap.get("endPagingNum"));
+		model.addAttribute("customerList", resultMap.get("customerList"));
+		
+		return "on/customerList";
+	}
+	
+	
 	@GetMapping("/on/addCustomer")
 	public String addCustomer(Model model
 							, @RequestParam(required = false) String searchAddress) {
