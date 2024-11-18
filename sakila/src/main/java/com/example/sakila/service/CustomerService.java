@@ -23,13 +23,13 @@ public class CustomerService {
 		return 0;
 	}
 	
-	public Map<String, Object> getCustomerList(Integer currentPage, Integer rowPerPage) {
+	public Map<String, Object> getCustomerList(Integer currentPage, Integer rowPerPage,String searchWord) {
 		Integer beginRow = (currentPage - 1) * rowPerPage;
 		
 		Map<String, Object> paramMap = new HashMap<>();
 		paramMap.put("beginRow", beginRow);
 		paramMap.put("rowPerPage", rowPerPage);
-		
+		paramMap.put("searchWord", searchWord);
 		// 한페이지당 페이징개수는 10개씩이라고 가정
 		Integer numPerPage = 10;
 		// 페이징 첫번째 페이지 넘버

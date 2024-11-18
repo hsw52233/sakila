@@ -30,8 +30,9 @@ public class CustomerController {
 	@GetMapping("/on/customerList")
 	public String customerList(Model model
 							, @RequestParam(defaultValue = "1") Integer currentPage
-							, @RequestParam(defaultValue = "10") Integer rowPerPage) {
-		Map<String, Object> resultMap = customerService.getCustomerList(currentPage, rowPerPage);
+							, @RequestParam(defaultValue = "10") Integer rowPerPage
+							, @RequestParam(required = false) String searchWord) {
+		Map<String, Object> resultMap = customerService.getCustomerList(currentPage, rowPerPage,searchWord);
 		
 		log.debug(resultMap.toString());
 		
@@ -40,6 +41,7 @@ public class CustomerController {
 		model.addAttribute("startPagingNum", resultMap.get("startPagingNum"));
 		model.addAttribute("endPagingNum", resultMap.get("endPagingNum"));
 		model.addAttribute("customerList", resultMap.get("customerList"));
+		model.addAttribute("searchWord",resultMap.get("searchWord"));
 		
 		return "on/customerList";
 	}

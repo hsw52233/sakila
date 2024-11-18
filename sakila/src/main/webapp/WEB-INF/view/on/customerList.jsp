@@ -75,15 +75,29 @@
 				<a href="${pageContext.request.contextPath}/on/customerList?currentPage=${currentPage+10}">
 					[다음] <!-- if분기 필요 -->
 				</a>
+				<c:if test="${currentPage < lastPage}">
+						<a href="${pageContext.request.contextPath}/on/customerList?currentPage=${lastPage}&searchWord=${searchWord}">&raquo;</a>
+					</c:if>
 			</div>
 			
 			<div>
-				<form>
-					<input type="text">
-					<button type="button">이름검색</buttton>
-				</form>
+					
+			 <form id="formSearch" action="${pageContext.request.contextPath}/on/customerList" method="get">
+				<input type="text" name="searchWord" id="searchWord">
+				<button id="btnSearch">이름검색</button>
+			</form>
+				
 			</div>
 		</div>
 	</div>
 </body>
+<script>
+	$('#btnSearch').click(function(){
+		if($('#searchWord').val() == '') {
+			alert('검색어를 입력하세요');
+			return;
+		} 
+		$('#formSearch').submit();
+	});
+</script>
 </html>
