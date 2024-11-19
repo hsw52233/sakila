@@ -47,7 +47,19 @@
 						</td>
 						<td>${iv.lastUpdate}</td>
 						<td>${iv.rentalDate}</td>
-						<td>${iv.customerId}</td>
+						<td><!-- 대여중인 상태면 고객ID, 대여가능이면 addRental링크 -->
+							<c:if test="${iv.customerId != null}">
+								<a href="${pageContext.request.contextPath}/on/customerOne?customerId=${iv.customerId}">
+									${iv.customerId}
+								</a>
+							</c:if>
+							<c:if test="${iv.customerId == null}">
+								<a href="${pageContext.request.contextPath}/on/addRental?inventoryId=${iv.inventoryId}" 
+									class="btn btn-primary">
+									대여
+								</a>
+							</c:if>
+						</td>
 						<td>
 							<a href="${pageContext.request.contextPath}/on/removeInventoryByKey?inventoryId=${iv.inventoryId}&storeId=${storeId}">
 								삭제

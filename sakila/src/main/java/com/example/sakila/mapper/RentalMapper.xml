@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.sakila.mapper.RentalMapper">
+	<insert id="insertRental"
+			parameterType="com.example.sakila.vo.Rental">
+		INSERT INTO rental (
+			rental_date, inventory_id, customer_id, staff_id
+		) VALUES (
+			#{rentalDate}, #{inventoryId}, #{customerId}, #{staffId}
+		)
+	</insert>
+</mapper>

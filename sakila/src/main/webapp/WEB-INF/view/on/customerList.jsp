@@ -27,28 +27,20 @@
 					<td>storeId</td>
 					<td>firstName</td>
 					<td>lastName</td>
-					<td>email</td>
-					<td>addressId</td>
-					<td>active</td>
-					<td>createDate</td>
-					<td>updateDate</td>
+					
 				</tr>
 				<c:forEach var="c" items="${customerList}">
 					<tr>
 						<td>
 							<!-- 고객 상세 정보(주소 X 렌탈 X 지불...조인 발생...) -->
-							<a href="">
+							<a href="${pageContext.request.contextPath}/on/customerOne?customerId=${c.customerId}">
 								${c.customerId}
 							</a>
 						</td>
 						<td>${c.storeId}</td>
 						<td>${c.firstName}</td>
 						<td>${c.lastName}</td>
-						<td>${c.email}</td>
-						<td>${c.addressId}</td>
-						<td>${c.active}</td>
-						<td>${c.createDate}</td>
-						<td>${c.lastUpdate}</td>
+						
 					</tr>
 				</c:forEach>
 			</table>

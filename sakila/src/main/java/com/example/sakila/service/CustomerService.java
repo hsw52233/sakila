@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.sakila.mapper.CustomerMapper;
+
 import com.example.sakila.vo.Customer;
 
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +19,16 @@ import lombok.extern.slf4j.Slf4j;
 @Transactional
 public class CustomerService {
 	@Autowired CustomerMapper customerMapper;
+	
+	// /on/actorOne
+		public Customer getCustomerOne(int customerId) {
+			return customerMapper.selectCustomerOne(customerId);
+		}
+		
+	
+	public List<Customer> getCustomerListByName(String searchName) {
+		return customerMapper.selectCustomerListByName(searchName);
+	}
 	
 	public Integer getLastPage(Integer rowPerPage) {
 		return 0;

@@ -1,23 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.sakila.mapper.CustomerMapper">
+	<select id="selectCustomerOne"
+			parameterType="int"
+			resultType="com.example.sakila.vo.Customer">
+		SELECT 
+			customer_id customerId
+			, store_id storeId
+			, first_name firstName
+			, last_name lastName
+			, address_id addressId
+			, email
+			, create_date createDate
+			, last_update lastUpdate
+		FROM customer
+		WHERE customer_id = #{customerId}
+	</select>
 	
 	
 	
-	<select id="selectActorListByCustomer"
+	
+	
+	<!-- /on/addRental -->
+	<select id="selectCustomerListByName"
 			parameterType="String"
 			resultType="com.example.sakila.vo.Customer">
 		SELECT 
 			customer_id customerId
 			, first_name firstName
 			, last_name lastName
+			, email email
 		FROM customer
-		WHERE first_name LIKE CONCAT('%', #{searchName}, '%')
-		OR last_name LIKE CONCAT('%', #{searchName}, '%')
+		WHERE ACTIVE = 1 AND 
+		LOWER(CONCAT(first_name, last_name)) LIKE CONCAT('%',LOWER(#{searchName}),'%')
 	</select>
-	
-	
-	
 	
 	<select id="selectCustomerList" 
 			parameterType="Map"
@@ -32,12 +48,6 @@
 			, create_date createDate
 			, last_update lastUpdate
 		FROM customer
-		<where>
-			<if test="searchWord != null">
-				first_name LIKE CONCAT('%', #{searchWord}, '%')
-				OR last_name LIKE CONCAT('%', #{searchWord}, '%')
-			</if>
-		</where>
 		ORDER BY customer_id DESC
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
