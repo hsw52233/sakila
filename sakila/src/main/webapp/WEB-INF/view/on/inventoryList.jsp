@@ -33,6 +33,8 @@
 					<td>inventoryId</td>
 					<td>(filmId)title</td>
 					<td>lastUpdate</td>
+					<td>대여</td>
+					<td>customerId</td>
 					<td>삭제</td>
 				</tr>
 				<c:forEach var="iv" items="${inventoryList}">
@@ -44,6 +46,8 @@
 							</a>
 						</td>
 						<td>${iv.lastUpdate}</td>
+						<td>${iv.rentalDate}</td>
+						<td>${iv.customerId}</td>
 						<td>
 							<a href="${pageContext.request.contextPath}/on/removeInventoryByKey?inventoryId=${iv.inventoryId}&storeId=${storeId}">
 								삭제

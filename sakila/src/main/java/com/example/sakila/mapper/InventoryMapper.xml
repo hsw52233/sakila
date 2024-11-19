@@ -20,17 +20,31 @@
 	<!-- 추가수정.... film x rental x payment ... x coustomer -->
 	<!-- 검색기능추가..... -->
 	<select id="selectInventoryListByStore"
-		parameterType="Map"
-		resultType="Map">
-		SELECT
-			i.inventory_id inventoryId
-			, i. film_id filmId
-			, f.title title
-			, i.last_update lastUpdate
-		FROM inventory i INNER JOIN film f
-		ON i.film_id = f.film_id
-		WHERE i.store_id = #{storeId}
-		ORDER BY i.inventory_id DESC
+			parameterType="Map"
+			resultType="Map">
+		SELECT 
+			t1.inventory_id inventoryId
+			, t1.film_id filmId
+			, t1.title title
+			, t1.last_update lastUpdate
+			, t2.customer_id customerId
+			, IFNULL(t2.rental_date, '대여가능') rentalDate
+		FROM  
+				(SELECT
+				i.inventory_id
+				, i. film_id
+				, f.title
+				, i.last_update
+				, i.store_id
+				FROM inventory i INNER JOIN film f
+				ON i.film_id = f.film_id) t1
+					LEFT OUTER JOIN 
+					(SELECT inventory_id, customer_id, rental_date
+					FROM rental
+					WHERE return_date IS NULL) t2
+					ON t1.inventory_id = t2.inventory_id
+		WHERE t1.store_id = #{storeId}
+		ORDER BY t1.inventory_id DESC
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
 	
